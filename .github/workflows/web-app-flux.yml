@@ -11,9 +11,13 @@ jobs:
     env:
       GOPATH: ${{ github.workspace }}
       GO11MODULE: off
+      CGO_ENABLED: 0
+      GOOS: linux
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        path: ./src/github.com/${{ github.repository }}
     - name: Setup Env
       uses: actions/setup-go@v2
       with:
@@ -23,4 +27,4 @@ jobs:
       run: |
         cd ./src/github.com/${{ github.repository }}/hola/
         go get github.com/rakyll/statik 
-        CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo
+        go build -ldflags="-w -s" -a -installsuffix cgo
