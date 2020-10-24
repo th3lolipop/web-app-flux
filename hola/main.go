@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/DTherHtun/hola/statik"
+	_ "github.com/DTherHtun/web-app-flux/hola/statik"
 	"github.com/rakyll/statik/fs"
 )
 
