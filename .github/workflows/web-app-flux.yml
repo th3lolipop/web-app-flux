@@ -25,6 +25,13 @@ jobs:
         go-version: ${{ matrix.go-version }}
     - name: GO Get 
       run: |
-        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         go get github.com/rakyll/statik 
+    - name: GO BUILD
+      run: |
+        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         go build -ldflags="-w -s" -a -installsuffix cgo
+    - name: Sent Noti
+      uses: docker://dther/google-chat-action:latest
+      with:
+        msg: ${{ job.status }}
+        webhook: "https://chat.googleapis.com/v1/spaces/AAAAzPcAy4s/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MmdzluicdrdkyUAV_QwB6BzlLcIhbfrwNzxVrEllaec%3D&threadKey=git-commit"
