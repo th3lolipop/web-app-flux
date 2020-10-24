@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-go@v2
       with:
         path: ./src/github.com/${{ github.repository }}
-        go-version: ${{ metrix.go-version }}
+        go-version: ${{ matrix.go-version }}
     - name: GO Get 
       run: |
         cd ./src/github.com/${{ github.repository }}/hola/
