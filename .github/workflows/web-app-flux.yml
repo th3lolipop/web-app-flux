@@ -13,6 +13,7 @@ jobs:
       GO11MODULE: off
       CGO_ENABLED: 0
       GOOS: linux
+      CONTAINER_VERSION: v0.1
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -32,6 +33,12 @@ jobs:
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         go build -ldflags="-w -s" -a -installsuffix cgo
+    - name: Docker Build & Push Image
+      run: |
+        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "dther" --password-stdin
+        docker image build -t dther/web-app-flux:${{ CONTAINER_VERSION }} .
+        docker push dther/web-app-flux:${{ CONTAINER_VERSION }}
     - name: Sent Noti
       if: ${{ always() }}
       uses: DTherHtun/google-chat-action@v0.8
