@@ -1,5 +1,7 @@
 name: Setup Go environment
 on: [push, pull_request]
+env:
+  tags: 'v0.2'
 
 jobs:
   go_build:
@@ -54,5 +56,5 @@ jobs:
       run: |
         cd ${{ github.workspace }}/hola/
         echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-        docker build -t dther/web-app-flux:v0.1 .
-        docker push dther/web-app-flux:v0.1
+        docker build -t dther/web-app-flux:${{ env.tags }} .
+        docker push dther/web-app-flux:${{ env.tags }}
