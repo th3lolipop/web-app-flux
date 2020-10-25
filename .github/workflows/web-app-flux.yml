@@ -52,13 +52,11 @@ jobs:
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Change Directory
-      run: |
-        cd ./hola
     - name: Docker Build & Push Image
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
+        file: ./hola/Dockerfile
         tags: v0.1
         push: true
