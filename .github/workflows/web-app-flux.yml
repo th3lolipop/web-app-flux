@@ -25,9 +25,9 @@ jobs:
       with:
         path: ${{ github.workspace }}/GOHOME
         go-version: ${{ matrix.go-version }}
-          #- name: GO Get 
-          #run: |
-          # go get github.com/rakyll/statik 
+    - name: GO Get 
+      run: |
+        go get github.com/rakyll/statik 
     - name: GO BUILD
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
