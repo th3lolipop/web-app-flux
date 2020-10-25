@@ -55,4 +55,4 @@ jobs:
         cd ${{ github.workspace }}/hola/
         echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
         docker build -t dther/web-app-flux:v0.1 .
-        docker push dther/web-app-flux:v0.1 . 
+        docker push dther/web-app-flux:v0.1
