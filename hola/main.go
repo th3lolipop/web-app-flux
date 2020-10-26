@@ -22,7 +22,7 @@ type InfoPageData struct {
 	Infos     []Info
 }
 
-func main() {
+func maain() {
 	hostName, err := os.Hostname()
 	if err != nil {
 		panic(err)
