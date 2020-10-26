@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: hola
-        image: dther/web-app-flux:v0.3
+        image: dther/web-app-flux:v0.4
         ports:
         - containerPort: 8080
