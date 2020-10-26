@@ -53,12 +53,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [go_build]
     if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+    env:
+      GOPATH: ${{ github.workspace }}/GOHOME
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        path: ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}
     - name: Build & push
       run: |
-        cd ${{ github.workspace }}/hola/
+        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
         docker build -t dther/web-app-flux:${{ env.tags }} .
         docker push dther/web-app-flux:${{ env.tags }}
