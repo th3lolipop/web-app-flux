@@ -30,6 +30,10 @@ jobs:
     - name: GO Get 
       run: |
         go get github.com/rakyll/statik 
+    - name: GO Test
+      run: |
+        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
+        go test -v
     - name: GO BUILD
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
