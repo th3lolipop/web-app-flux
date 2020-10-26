@@ -1,17 +1,18 @@
 name: Setup Go environment
 on: [push, pull_request]
 env:
-  tags: 'v0.2'
+  tags: 'v0.3'
 
 jobs:
   go_build:
     runs-on: ${{ matrix.os }}
+    if: ${{ github.ref != 'refs/tags/flux' }}
     strategy:
       matrix:
         go-version: [1.15.x]
         os: [ubuntu-latest]
     env:
-      GOPATH: ${{ github.workspace }}/GOHOME
+      GOPATH: GOHOME
       GO11MODULE: off
       CGO_ENABLED: 0
       GOOS: linux
@@ -19,24 +20,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        path: ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}
+        path: GOHOME/src/github.com/${{ github.repository }}
     - run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
       id: slug
     - name: Setup Env
       uses: actions/setup-go@v2
       with:
-        path: ${{ github.workspace }}/GOHOME
+        path: GOHOME
         go-version: ${{ matrix.go-version }}
     - name: GO Get 
       run: |
         go get github.com/rakyll/statik 
     - name: GO Test
       run: |
-        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
+        cd GOHOME/src/github.com/${{ github.repository }}/hola/
         go test -v
     - name: GO BUILD
       run: |
-        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
+        cd GOHOME/src/github.com/${{ github.repository }}/hola/
         go build -ldflags="-w -s" -a -installsuffix cgo
     - name: Sent Noti
       if: ${{ always() }}
@@ -54,15 +55,15 @@ jobs:
     needs: [go_build]
     if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
     env:
-      GOPATH: ${{ github.workspace }}/GOHOME
+      GOPATH: GOHOME
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        path: ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}
+        path: GOHOME/src/github.com/${{ github.repository }}
     - name: Build & push
       run: |
-        cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
+        cd GOHOME/src/github.com/${{ github.repository }}/hola/
         echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
         docker build -t dther/web-app-flux:${{ env.tags }} .
         docker push dther/web-app-flux:${{ env.tags }}
