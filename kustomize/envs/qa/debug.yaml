@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hola
+spec:
+  template:
+    spec:
+      containers:
+      - name: hola
+        env:
+        - name: DEBUG
+          value: "true"

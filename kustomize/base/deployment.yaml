@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hola
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hola
+  template:
+    metadata:
+      labels:
+        app: hola
+    spec:
+      containers:
+        image: dther/web-app-flux:REPLACEME
+        name: hola
+        ports:
+        - containerPort: 8080
