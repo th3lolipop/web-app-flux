@@ -75,6 +75,8 @@ jobs:
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        ref: deployment
     - name: Change Images tags
       run: |
         sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' workloads/hola.yaml
