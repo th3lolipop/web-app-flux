@@ -1,12 +1,12 @@
 name: Setup Go environment
 on: [push, pull_request]
 env:
-  tags: 'v0.4'
+  tags: 'v0.5'
 
 jobs:
   go_build:
     runs-on: ${{ matrix.os }}
-    if: ${{ github.ref != 'refs/tags/flux' }}
+    if: ${{ github.ref != 'refs/tags/flux' || github.ref != 'refs/heads/deployment' }}
     strategy:
       matrix:
         go-version: [1.15.x]
@@ -67,3 +67,24 @@ jobs:
         echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
         docker build -t dther/web-app-flux:${{ env.tags }} .
         docker push dther/web-app-flux:${{ env.tags }}
+
+  push_k8s_manifest:
+    runs-on: ubuntu-latest
+    needs: [docker_bp]
+    if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+    steps: 
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Change Images tags
+      run: |
+        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' workloads/hola.yaml
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GH_TOKEN }}
+        branch: deployment
