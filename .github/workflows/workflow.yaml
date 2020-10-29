@@ -1,7 +1,7 @@
 name: Setup Go environment
 on: [push, pull_request]
 env:
-  tags: 'v0.6'
+  tags: 'v0.5'
 
 jobs:
   go_build:
