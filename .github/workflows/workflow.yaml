@@ -6,7 +6,7 @@ env:
 jobs:
   go_build:
     runs-on: ${{ matrix.os }}
-    if: ${{ github.ref != 'refs/tags/flux' || github.ref != 'refs/heads/deployment' }}
+    if: ${{ github.ref != 'refs/tags/flux' && github.ref != 'refs/heads/deployment' }}
     strategy:
       matrix:
         go-version: [1.15.x]
