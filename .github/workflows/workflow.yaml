@@ -54,11 +54,16 @@ jobs:
       uses: jackton1/find-changed-files@v1.1
       with:
         files: "hola"
+    - name: Cancel Previous Runs
+      if: steps.changed_files.outputs.files_changed != 'true'
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ secrets.GH_TOKEN }}
 
   docker_bp:
     runs-on: ubuntu-latest
     needs: [go_build]
-    if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' && steps.changed_files.outputs.files_changed == 'true' }}
+    if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
     env:
       GOPATH: ${{ github.workspace }}/GOHOME
     steps: 
