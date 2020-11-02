@@ -5,7 +5,7 @@ metadata:
   namespace: qa
 spec:
   rules:
-  - host: hola.opslab.local
+  - host: hola-qa.opslab.local
     http:
       paths:
       - path: /
