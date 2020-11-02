@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: hola
-  namespace: hola-web
+  namespace: qa
 spec:
   rules:
   - host: hola.opslab.local

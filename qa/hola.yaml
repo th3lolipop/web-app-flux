@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hola
-  namespace: hola-web
+  namespace: qa
   labels:
     app: hola
 spec:
