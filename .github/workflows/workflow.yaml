@@ -79,7 +79,8 @@ jobs:
         ref: deployment
     - name: Change Images tags
       run: |
-        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' workloads/hola.yaml
+        git pull origin master --allow-unrelated-histories
+        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' qa/hola.yaml
         echo ${GITHUB_SHA} > uniqe_sha.txt
     - name: Commit files
       run: |
