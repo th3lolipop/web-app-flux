@@ -85,8 +85,10 @@ jobs:
       uses: stefanprodan/kube-tools@v1
       with:
         command: |
-          kustomize build ./kustomize/bases/hola/deployment.yaml | kubeval --strict
-          kustomize build ./kustomize/bases/hola/deployment.yaml | conftest test -p .github/policies -
+          kustomize build ./kustomize/overlays/qa/ | kubeval --strict
+          kustomize build ./kustomize/overlays/qa/ | conftest test -p .github/policies -
+          kustomize build ./kustomize/overlays/production/ | kubeval --strict
+          kustomize build ./kustomize/overlays/production/ | conftest test -p .github/policies -
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
