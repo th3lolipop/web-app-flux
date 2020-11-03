@@ -7,3 +7,7 @@ resources:
   - namespace.yaml
 transformers:
   - labels.yaml
+configMapGenerator:
+  - name: config_hola_domain
+    literals:
+      - HOLA_DOMAIN='hola.opslab.local'

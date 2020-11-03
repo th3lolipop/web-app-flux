@@ -4,7 +4,7 @@ metadata:
   name: hola-ing
 spec:
   rules:
-  - host: hola-qa.opslab.local
+  - host: config.HOLA_DOMAIN
     http:
       paths:
       - path: /
