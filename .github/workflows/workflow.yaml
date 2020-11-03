@@ -1,4 +1,4 @@
-name: Setup Go environment
+name: CI
 on: [push, pull_request]
 env:
   tags: 'v0.3'
@@ -83,7 +83,7 @@ jobs:
         echo ${GITHUB_SHA} > uniqe_sha.txt
     - name: Validate kustomization
       uses: stefanprodan/kube-tools@v1
-      with: |
+      with:
         command: |
           kustomize build ./kustomize/bases/hola/deployment.yaml | kubeval --strict
           kustomize build ./kustomize/bases/hola/deployment.yaml | conftest test -p .github/policies -
