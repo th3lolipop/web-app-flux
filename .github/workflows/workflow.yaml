@@ -1,7 +1,7 @@
 name: CI
 on: [push, pull_request]
 env:
-  tags: 'v0.3'
+  tags: 'v0.2'
 
 jobs:
   go_build:
