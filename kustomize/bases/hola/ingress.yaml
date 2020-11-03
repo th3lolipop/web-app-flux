@@ -4,7 +4,7 @@ metadata:
   name: hola-ing
 spec:
   rules:
-  - host: config.HOLA_DOMAIN
+  - host: HOLA_DOMAIN
     http:
       paths:
       - path: /
