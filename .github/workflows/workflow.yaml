@@ -79,8 +79,14 @@ jobs:
         ref: deployment
     - name: Change Images tags
       run: |
-        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' qa/hola.yaml
+        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' ./kustomize/bases/hola/deployment.yaml
         echo ${GITHUB_SHA} > uniqe_sha.txt
+    - name: Validate kustomization
+      uses: stefanprodan/kube-tools@v1
+      with: |
+        command: |
+          kustomize build ./kustomize/bases/hola/deployment.yaml | kubeval --strict
+          kustomize build ./kustomize/bases/hola/deployment.yaml | conftest test -p .github/policies -
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"

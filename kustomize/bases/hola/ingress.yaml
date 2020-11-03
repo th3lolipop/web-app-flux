@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hola-ing
+spec:
+  rules:
+  - host: hola-qa.opslab.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hola-svc
+          servicePort: 80
