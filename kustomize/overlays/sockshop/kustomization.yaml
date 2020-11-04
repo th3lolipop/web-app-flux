@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sockshop
+resources:
+  - ../../bases/sockshop/carts
+  - ../../bases/sockshop/carts-db
+  - ../../bases/sockshop/catalogue
+  - ../../bases/sockshop/catalogue-db
+  - ../../bases/sockshop/front-end
+  - ../../bases/sockshop/orders
+  - ../../bases/sockshop/orders-db
+  - ../../bases/sockshop/payment
+  - ../../bases/sockshop/queue-master
+  - ../../bases/sockshop/rabbitmq
+  - ../../bases/sockshop/shipping
+  - ../../bases/sockshop/user
+  - ../../bases/sockshop/user-db
+  - namespace.yaml
+transformers:
+  - labels.yaml
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1beta1
+      kind: Ingress
+      name: frontend-ing
+    path: ing-patch.yaml
+
