@@ -89,6 +89,7 @@ jobs:
           kustomize build ./kustomize/overlays/qa/ | conftest test -p .github/policies -
           kustomize build ./kustomize/overlays/production/ | kubeval --strict
           kustomize build ./kustomize/overlays/production/ | conftest test -p .github/policies -
+          kustomize build ./kustomize/overlays/sockshop/ | kubeval --strict
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
