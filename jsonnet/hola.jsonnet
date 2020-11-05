@@ -1,17 +1,19 @@
-function(prod=false) {                    
+local name = "hola";
+local version = "v0.4";
+local replicas = 2;
+{
    "apiVersion": "apps/v1",
    "kind": "Deployment",
    "metadata": {
-      "name": "hola",
-      "namespace: "hola-web"
+      "name": name
    },
    "spec": {
       "selector": {
          "matchLabels": {
-            "app": $.metadata.name      
+            "app": name
          }
       },
-      "replicas": if prod then 10 else 1, 
+      "replicas": replicas,
       "template": {
          "metadata": {
             "labels": {
@@ -21,8 +23,8 @@ function(prod=false) {
          "spec": {
             "containers": [
                {
-                  "name": $.metadata.name,
-                  "image": "dther/web-app-flux:v0.4",
+                  "name": name,
+                  "image": "dther/web-app-flux:" + version,
                   "ports": [
                      {
                         "containerPort": 8080

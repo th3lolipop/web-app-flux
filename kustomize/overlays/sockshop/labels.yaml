@@ -3,7 +3,7 @@ kind: LabelTransformer
 metadata:
   name: labels
 labels:
-  env: qa
+  env: sockshop
   instance: webapp
 fieldSpecs:
   - path: metadata/labels
