@@ -26,7 +26,7 @@ $ brew install fluxctl
 $ brew install argocd
 ```
 
-# Commands for fluxCd
+# Commands for fluxcd
 
 ```
 $ kubectl create namespace flux
@@ -39,7 +39,7 @@ $ fluxctl list-workloads -A
 $ fluxctl list-images
 ```
 
-# SetUp ArgoCD
+# Setup ArgoCD
 
 ```
 $ kubectl create namespace argocd
