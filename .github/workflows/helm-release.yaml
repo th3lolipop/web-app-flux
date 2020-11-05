@@ -1,0 +1,20 @@
+name: release-chart
+on:
+  push:
+    tags: 'chart-*'
+
+jobs:
+  release-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          charts_dir: charts
+          charts_url: https://dtherhtun.github.io/web-app-flux
+          owner: $GITHUB_ACTOR
+          repository: web-app-flux
+          branch: gh-pages
+          target_dir: charts
