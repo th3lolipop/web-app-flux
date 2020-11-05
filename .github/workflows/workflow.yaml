@@ -64,7 +64,7 @@ jobs:
     - name: Build & push
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
-        echo "${{ secrets.GH_TOKEN }}" | docker login -u dtherhtun --password-stdin
+        echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u dtherhtun --password-stdin
         docker build -t ghcr.io/dtherhtun/web-app-flux:${{ env.tags }} .
         docker push ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}
     - name: Publish helm chart
