@@ -64,7 +64,7 @@ jobs:
     - name: Build & push
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
-        echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u dtherhtun --password-stdin
+        echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
         docker build -t ghcr.io/dtherhtun/web-app-flux:${{ env.tags }} .
         docker push ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}
 
@@ -79,7 +79,7 @@ jobs:
         ref: deploy
     - name: Change Images tags
       run: |
-        sed -i 's+dther/web-app-flux:.*$*+dther/web-app-flux:${{ env.tags }}+' ./kustomize/bases/hola/deployment.yaml
+        sed -i 's+ghcr.io/dtherhtun/web-app-flux:.*$*+ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}+' ./kustomize/bases/hola/deployment.yaml
         echo ${GITHUB_SHA} > uniqe_sha.txt
     - name: Validate kustomization
       uses: stefanprodan/kube-tools@v1

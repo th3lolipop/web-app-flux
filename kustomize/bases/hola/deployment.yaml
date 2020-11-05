@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: hola
-        image: dther/web-app-flux:v0.4
+        image: ghcr.io/dtherhtun/web-app-flux:v0.5
         ports:
         - containerPort: 8080
         resources:
