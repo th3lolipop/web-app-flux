@@ -64,9 +64,13 @@ jobs:
     - name: Build & push
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
-        echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-        docker build -t dther/web-app-flux:${{ env.tags }} .
-        docker push dther/web-app-flux:${{ env.tags }}
+        echo "${{ secrets.GH_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+        docker build -t ghcr.io/dtherhtun/web-app-flux:${{ env.tags }} .
+        docker push ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}
+    - name: Publish helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
   push_k8s_manifest:
     runs-on: ubuntu-latest
