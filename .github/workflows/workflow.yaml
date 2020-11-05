@@ -68,9 +68,9 @@ jobs:
         docker build -t ghcr.io/dtherhtun/web-app-flux:${{ env.tags }} .
         docker push ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}
     - name: Publish helm chart
-        uses: stefanprodan/helm-gh-pages@master
-        with:
-          token: ${{ secrets.GH_TOKEN }}
+      uses: stefanprodan/helm-gh-pages@master
+      with:
+        token: ${{ secrets.GH_TOKEN }}
 
   push_k8s_manifest:
     runs-on: ubuntu-latest
