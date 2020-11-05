@@ -64,13 +64,25 @@ jobs:
     - name: Build & push
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
-        echo "${{ secrets.GH_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+        echo "${{ secrets.GH_TOKEN }}" | docker login -u dtherhtun --password-stdin
         docker build -t ghcr.io/dtherhtun/web-app-flux:${{ env.tags }} .
         docker push ghcr.io/dtherhtun/web-app-flux:${{ env.tags }}
     - name: Publish helm chart
       uses: stefanprodan/helm-gh-pages@master
       with:
         token: ${{ secrets.GH_TOKEN }}
+    - uses: ./.github/actions/release-notes
+    - name: Generate release notes
+      run: |
+        echo 'CHANGELOG' > /tmp/release.txt
+        github-release-notes -org dtherhtun -repo web-app-flux -since-latest-release >> /tmp/release.txt
+    - name: Publish release
+      uses: goreleaser/goreleaser-action@v1
+      with:   
+        version: latest
+        args: release --release-notes=/tmp/release.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
   push_k8s_manifest:
     runs-on: ubuntu-latest
