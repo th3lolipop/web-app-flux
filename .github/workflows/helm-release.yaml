@@ -17,4 +17,4 @@ jobs:
           owner: $GITHUB_ACTOR
           repository: web-app-flux
           branch: gh-pages
-          target_dir: charts
+          target_dir: .
