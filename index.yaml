@@ -3,12 +3,12 @@ entries:
   hola:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-11-05T17:59:16.500558717Z"
+    created: "2020-11-05T18:09:01.601333326Z"
     description: A Helm chart for Kubernetes
-    digest: 095ae2aeb6f54b01d2a0e07578f8ab254677430264cba93c963ec25bb890462a
+    digest: 15745564314135611d00cd14b3e5073a0e4dee5ba6944f6dc245bc08c7f9a7ca
     name: hola
     type: application
     urls:
     - https://dtherhtun.github.io/web-app-flux/hola-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-05T17:59:16.499519757Z"
+generated: "2020-11-05T18:09:01.600585426Z"
