@@ -20,6 +20,7 @@ $ kubectl -n ingress-nginx rollout status deployment/ingress-nginx-controller
 
 ```
 $ brew install kustomize
+$ brew tap instrumenta/instrumenta
 $ brew install conftest
 $ brew install kubeval
 $ brew install fluxctl
