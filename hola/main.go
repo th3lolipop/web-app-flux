@@ -39,7 +39,7 @@ func main() {
 	tmpl := template.Must(template.ParseFiles("./index.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := InfoPageData{
-			PageTitle: "Welcome! Hello Opslab",
+			PageTitle: "Welcome! WAIYANMIN, PHYOMINHTUN, YEMINPHYO",
 			Infos: []Info{
 				{Title: "Pod Name - ", Done: hostName},
 				{Title: "Host - ", Done: r.Host},
